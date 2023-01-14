@@ -1,4 +1,10 @@
 {
   "name": "eticaret.backend.node",
-  "packageManager": "yarn@3.3.1"
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/takimbirprojeler/eticaret.backend.node.git",
+  "author": "caglar",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["productService", "backupDir"]
 }

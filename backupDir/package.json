@@ -1,0 +1,9 @@
+{
+  "name": "backupDir",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "productService": "1.0.0"
+  }
+}
