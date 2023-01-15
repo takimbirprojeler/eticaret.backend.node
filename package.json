@@ -1,5 +1,8 @@
 {
   "private": true,
-  "workspaces": ["apps", "libs"]
+  "workspaces": ["apps", "libs"],
+  "scripts": {
+    "prestart": "cp scripts/pre-commit .git/hooks/ && chmod +x .git/hooks/pre-commit && echo 'hook copied'"
+  }
 }
 
