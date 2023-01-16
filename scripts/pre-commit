@@ -4,7 +4,7 @@ echo "*****Running unit tests******"
 
 git stash -q --keep-index
 
-cd apps/product-service
+cd services/product-service
 
 yarn test
 
