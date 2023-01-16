@@ -10,3 +10,4 @@
 .yarn/cache/
 .pnp.*
 .yarn/unplugged/
+node_modules
