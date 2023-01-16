@@ -12,7 +12,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],\
     "dependencyTreeRoots": [\
       {\
-        "name": "eticaretbackendnode",\
+        "name": "eticaretBackendNode",\
         "reference": "workspace:."\
       },\
       {\
@@ -23,7 +23,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["eticaretbackendnode", ["workspace:."]],\
+      ["eticaretBackendNode", ["workspace:."]],\
       ["product-service", ["workspace:services/product-service"]]\
     ],\
     "fallbackPool": [\
@@ -4104,11 +4104,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["eticaretbackendnode", [\
+      ["eticaretBackendNode", [\
         ["workspace:.", {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["eticaretbackendnode", "workspace:."]\
+            ["eticaretBackendNode", "workspace:."]\
           ],\
           "linkType": "SOFT"\
         }]\

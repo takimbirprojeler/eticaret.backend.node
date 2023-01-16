@@ -3037,9 +3037,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eticaretbackendnode@workspace:.":
+"eticaretBackendNode@workspace:.":
   version: 0.0.0-use.local
-  resolution: "eticaretbackendnode@workspace:."
+  resolution: "eticaretBackendNode@workspace:."
   languageName: unknown
   linkType: soft
 
