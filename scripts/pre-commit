@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "*****Running unit tests******"
+
+git stash -q --keep-index
+
+cd services/product-service
+
+yarn test
+
+status=$?
+
+git stash pop -q
+
+exit $status
