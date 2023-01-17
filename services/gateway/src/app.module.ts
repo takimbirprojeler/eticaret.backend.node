@@ -6,9 +6,11 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
+
+    // register grpc dynamic grpc client as servise
     ClientsModule.register([
     {
-      name: 'PRODUCT_PACKAGE',
+      name: 'PRODUCT_SERVICE',
       transport: Transport.GRPC,
       options: {
         package: 'product',

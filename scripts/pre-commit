@@ -6,7 +6,7 @@ git stash -q --keep-index
 
 cd services/product
 
-yarn test
+yarn run test
 
 status=$?
 
