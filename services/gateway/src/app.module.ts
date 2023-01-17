@@ -10,11 +10,11 @@ import { AppService } from './app.service';
     // register grpc dynamic grpc client as servise
     ClientsModule.register([
     {
-      name: 'PRODUCT_SERVICE',
-      transport: Transport.GRPC,
+      name: 'PRODUCT_SERVICE', // inject token - used to inject this client as service in controllers and other services
+      transport: Transport.GRPC, // transporter
       options: {
-        package: 'product',
-        protoPath: join(__dirname, 'proto/products.proto'),
+        package: 'product', // need to match package name in .proto file
+        protoPath: join(__dirname, 'proto/products.proto'), // protofile location
       },
     },
   ])
