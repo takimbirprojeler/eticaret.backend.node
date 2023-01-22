@@ -4,9 +4,9 @@ echo "*****Running unit tests******"
 
 git stash -q --keep-index
 
-cd services/product-service
+cd services/product
 
-# yarn test
+yarn run test
 
 status=$?
 
