@@ -23,7 +23,7 @@ export class AppController implements OnModuleInit {
 
   private grpcService: IProductService;
    onModuleInit() {   
-    this.grpcService = this.client.getService<IProductService>('ProductService'); 
+    this.grpcService = this.client.getService<IProductService>('ProductController'); 
   }                                                                       
 
 
