@@ -9,7 +9,6 @@ export class ProductController {
 
   @GrpcMethod()
   FindOne(data: IProductById): IProduct {
-    console.log(data);
     return this.productService.ProductById(data);
-  } //
+  }
 }
