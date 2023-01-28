@@ -1,0 +1,14 @@
+{
+  "name": "@entities/product",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build:dev": "tsc -w",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@libs/couchbase": "*",
+    "couchbase": "^4.2.0"
+  }
+}

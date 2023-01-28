@@ -1,0 +1,14 @@
+{
+  "name": "@libs/couchbase",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+    "scripts": {
+    "build:dev": "tsc -w",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "couchbase": "^4.2.0"
+  }
+}
