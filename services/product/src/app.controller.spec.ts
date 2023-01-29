@@ -15,7 +15,7 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
+    it('should return samsung', () => {
       expect(productController.FindOne({ id: 1 })).toStrictEqual({
         id: 1,
         name: 'samsung',
