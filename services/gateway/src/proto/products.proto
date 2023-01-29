@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package product;
 
-service ProductService {
+service ProductController {
   rpc FindOne (ProductById) returns (Product) {}
 }
 
