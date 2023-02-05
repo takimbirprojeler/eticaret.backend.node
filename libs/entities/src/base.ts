@@ -3,10 +3,11 @@ import { createId } from "@paralleldrive/cuid2"
 //#region  Record base
 
 export interface RecordBase {
-    id: string;
-    createdAt: Readonly<Date> | Readonly<number>; // date or timestamp
-    updateAt: number; // date or timestamp
-    getCreateAtAsDate(): Date
+    id: string
+    createdAt: Readonly<number>; // timestamp
+    updateAt: number; // timestamp
+    deleteAt: number; // if record is deleted
+    getCreateAtAsDate(): Date // get as date
     getUpdateAtAsDate(): Date
 }
 
