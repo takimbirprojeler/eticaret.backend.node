@@ -3,8 +3,12 @@ import { User } from "./user"
 
 
 export interface Session extends RecordBase {
-    token: string
-    user: User | string // user or id key
+    token: string;
+    user: User | string; // user or id key
+    location: string;
+    device: string;
+    browser: string;
+    os: string;
 }
 
 
