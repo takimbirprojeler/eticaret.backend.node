@@ -1,0 +1,10 @@
+{
+  "name": "@libs/entities",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.0.1"
+  }
+}
