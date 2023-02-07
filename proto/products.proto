@@ -1,0 +1,43 @@
+// products.proto
+syntax = "proto3";
+
+package product;
+
+service ProductController {
+  rpc FindOne (ProductById) returns (ProductReturnType) {}
+}
+
+message ProductById {
+  required string id = 1;
+}
+
+message ProductReturnType {
+  optional Product data = 1;
+}
+
+message Product {
+  required string id = 1;
+  optional string name = 2;
+  optional string sku = 3;
+  optional string description = 4;
+  optional Price price  = 5;
+  optional Category category = 6;
+}
+
+message Category {
+  required string id = 1;
+  optional string name = 2;
+  optional string description = 3;
+}
+
+message Price {
+  optional string unitType = 1;
+  optional float  price = 2;
+  optional float task = 3;
+}
+
+
+message Invertory {
+  required string id = 1;
+  optional int32 quantity = 2;
+}

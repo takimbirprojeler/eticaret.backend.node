@@ -12,7 +12,7 @@ import { GatewayController } from './gateway.controller';
         transport: Transport.GRPC, // transporter
         options: {
           package: 'product', // need to match package name in .proto file
-          protoPath: join(__dirname, 'proto/products.proto'), // protofile location
+          protoPath: join(process.cwd(), "../../", 'proto/products.proto'), // protofile location
         },
       },
     ]),

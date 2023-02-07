@@ -10,7 +10,7 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: 'product',
-      protoPath: join(__dirname, 'proto/products.proto'),
+      protoPath: join(process.cwd(), "../../", 'proto/products.proto'),
     } as MicroserviceOptions,
   });
   await app.listen();

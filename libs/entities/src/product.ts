@@ -30,3 +30,4 @@ export class Product extends RecordBase {
         Object.assign(this,data)
     }
 }
+

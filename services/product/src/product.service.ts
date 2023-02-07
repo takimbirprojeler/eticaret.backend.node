@@ -1,23 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { IProduct, IProductById } from './product.interfaces';
 
 @Injectable()
-export class ProductService {
-  ProductById(data: IProductById): IProduct {
+export class ProductService implements OnModuleInit {
+  onModuleInit() {
+    
+  }
+  ProductById(data: { id: string}) {
     const products = [
       {
-        id: 0,
-        name: 'iphone',
+        id: "apple",
+        name: 'iphone'
       },
-      {
-        id: 1,
-        name: 'samsung',
-      },
-      {
-        id: 2,
-        name: 'lg',
-      },
+   
     ];
-    return products[data.id] || { id: -1, name: 'notfound' };
+    return {
+      data: products[0]
+    };
   }
 }

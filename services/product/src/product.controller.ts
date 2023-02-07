@@ -8,7 +8,7 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @GrpcMethod()
-  FindOne(data: IProductById): IProduct {
-    return this.productService.ProductById(data);
+  FindOne(data: { id: string}) {
+    return this.productService.ProductById(data) || null;
   }
 }

@@ -3,13 +3,9 @@ import { ClientGrpc } from '@nestjs/microservices';
 
 // type definetions of product.proto file
 
-export interface IProduct {
-  id: number;
-  name: string;
-}
 
 export interface IProductService {
-  findOne(data: { id: number }): IProduct;
+  findOne(data: { id: string }): any;
 }
 
 @Controller()
@@ -19,7 +15,7 @@ export class GatewayController implements OnModuleInit {
     @Inject('PRODUCT_SERVICE') private readonly client: ClientGrpc,
   ) {}
 
-  private grpcService: IProductService;
+  private grpcService: any;
   onModuleInit() {
     this.grpcService =
       this.client.getService<IProductService>('ProductController');
@@ -33,9 +29,9 @@ export class GatewayController implements OnModuleInit {
   @Get(':id') // decarotor for GET http method  expose an endpoint at /:id eg localhost:3000/1
   getProduct(
     // access param like this
-    @Param('id') id: number,
-  ): { id: number; name: string } {
+    @Param('id') id: string
+  ) {
     // call method from remote service and get product by id
-    return this.grpcService.findOne({ id });
+    return this.grpcService.findOne({ id }) || null;
   }
 }
