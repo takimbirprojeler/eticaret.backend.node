@@ -8,7 +8,7 @@ export interface Invertory extends RecordBase {
 
 export class Invertory extends RecordBase {
        constructor(data: Invertory) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }

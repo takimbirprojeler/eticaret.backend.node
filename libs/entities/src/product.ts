@@ -26,7 +26,7 @@ export interface Product extends RecordBase {
 
 export class Product extends RecordBase {
        constructor(data: Product) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }

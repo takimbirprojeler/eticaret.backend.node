@@ -19,7 +19,7 @@ export interface Cart extends RecordBase {
 export class Cart extends RecordBase {
 
     constructor(data: Cart) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }
@@ -27,7 +27,7 @@ export class Cart extends RecordBase {
 export class CartItem extends RecordBase {
 
     constructor(data: CartItem) {
-        super(data as RecordBase)
+        super()
         Object.assign(this, data)
     }
 }

@@ -15,7 +15,7 @@ export interface Session extends RecordBase {
 export class Session extends RecordBase {
 
     constructor(data: Session) {
-        super(data as RecordBase)
+        super()
         Object.assign(this, data)
     }
 }

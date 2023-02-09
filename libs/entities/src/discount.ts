@@ -10,7 +10,7 @@ export interface Discount extends RecordBase {
 
 export class Discount extends RecordBase {
        constructor(data: Discount) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }
