@@ -15,7 +15,7 @@ export interface Perm extends RecordBase {
 
 export class Role extends RecordBase {
     constructor(data: Role) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }
@@ -23,7 +23,7 @@ export class Role extends RecordBase {
 
 export class Perm extends RecordBase {
     constructor(data: Perm) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }

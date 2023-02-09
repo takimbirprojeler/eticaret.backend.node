@@ -20,8 +20,8 @@ export interface User extends RecordBase {
 
 export class User extends RecordBase {
 
-    constructor(data: Role) {
-        super(data as RecordBase)
+    constructor(data: User) {
+        super()
         Object.assign(this,data)
     }
 }

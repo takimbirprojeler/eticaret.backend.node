@@ -4,15 +4,27 @@ syntax = "proto3";
 package product;
 
 service ProductController {
-  rpc FindOne (ProductById) returns (ProductReturnType) {}
+  rpc FindById (ProductById) returns (ProductReturnType) {}
+
+  rpc Create (ProductCreateArgs) returns (ProductReturnType) {}
 }
 
+
+message ProductCreateArgs {}
+message ProductCreateReturnType {}
 message ProductById {
   required string id = 1;
 }
 
 message ProductReturnType {
   optional Product data = 1;
+}
+
+
+enum PriceUnit {
+  TL = 0;
+  USD = 1;
+  EUR = 2;
 }
 
 message Product {
@@ -22,6 +34,13 @@ message Product {
   optional string description = 4;
   optional Price price  = 5;
   optional Category category = 6;
+  optional string brand = 7;
+  repeated Specs specs = 8;
+}
+
+message Specs {
+  string name = 1;
+  string value = 2;
 }
 
 message Category {
@@ -31,9 +50,9 @@ message Category {
 }
 
 message Price {
-  optional string unitType = 1;
-  optional float  price = 2;
-  optional float task = 3;
+  optional PriceUnit unitType = 1;
+  optional float  priceUnit = 2;
+  optional float  task = 3;
 }
 
 

@@ -9,25 +9,27 @@ export enum PriceUnit {
     EUR = "EUR"
 }
 export interface Product extends RecordBase {
-    name: string;
-    sku: string[]; // birden fazla barkoda sahip olabilir
+    name?: string;
+    sku?: string[]; // birden fazla barkoda sahip olabilir
     description?: string;
-    price: {
+    brand?: string;
+    specs?: Record<string, unknown>[]
+    price?: {
         unitType: PriceUnit;
         priceUnit: number;
         task: number;
     };
-    category: ProductCategory | string; // entity or id 
-    invertory: Invertory | string;
-    discount: Discount | string; // maybe unnecessary
+    category?: ProductCategory | string; // entity or id 
+    invertory?: Invertory | string;
+    discount?: Discount | string; // maybe unnecessary
 }
 
 
 
 export class Product extends RecordBase {
-       constructor(data: Product) {
-        super(data as RecordBase)
-        Object.assign(this,data)
+    constructor(data: Product) {
+        super()
+        Object.assign(this, data)
     }
 }
 
