@@ -1,9 +1,9 @@
 import { RecordBase } from "./base";
 import { Discount } from "./discount";
-import { Invertory } from "./invertory";
+import { Inventory } from "./inventory";
 import { ProductCategory } from "./product-category";
 
-export enum PriceUnit {
+export enum PriceType {
     TRY = "TL",
     USD = "USD",
     EUR = "EUR"
@@ -15,12 +15,12 @@ export interface Product extends RecordBase {
     sku: string[]; // birden fazla barkoda sahip olabilir
     description?: string;
     price: {
-        type: PriceUnit;
+        type: PriceType;
         unit: number;
         task: number;
     };
     category: ProductCategory | string; // entity or id 
-    invertory: Invertory | string;
+    inventory: Inventory | string;
     discount: Discount | string; // maybe unnecessary
 }
 
