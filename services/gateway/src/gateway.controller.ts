@@ -36,6 +36,6 @@ export class GatewayController implements OnModuleInit {
     @Param('id') id: number,
   ): { id: number; name: string } {
     // call method from remote service and get product by id
-    return this.grpcService.findOne({ id });
+     return this.grpcService.findOne({ id });
   }
 }
