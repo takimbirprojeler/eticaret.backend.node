@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "test" : "cd services/product && yarn test",
-    "test:e2e" : "cd services/gateway && yarn test:e2e" , 
+    "test:e2e" : "cd services/gateway && yarn test:e2e", 
     "load:scripts": "npx degit -f https://github.com/takimbirprojeler/eticaret.scripts.git scripts",
     "load:proto": "npx degit -f https://github.com/takimbirprojeler/eticaret.backend.proto.git libs/proto",
     "run:tests": "bash scripts/run-test.backend.node.sh"
