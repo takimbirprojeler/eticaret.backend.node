@@ -44,3 +44,5 @@ lerna-debug.log*
 #yarn.lock
 /yarn.lock
 **/yarn.lock
+
+/scripts

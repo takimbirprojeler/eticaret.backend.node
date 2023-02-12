@@ -11,7 +11,33 @@ message ProductById {
   int32 id = 1;
 }
 
+
+enum PriceType {
+    TL = 0;
+    USD = 1;
+    EUR = 2;
+  }
+
+message Price {
+  PriceType type = 1;
+  float unit = 2;
+  float task = 3;
+}
+
 message Product {
-  int32 id = 1;
-  string name = 2;
+  required string id = 1;
+  optional string name = 2;
+  optional string brand = 3;
+  repeated string sku = 4;
+  optional string description = 5;
+  optional Price price = 6;
+  optional string category = 7; // to do return category as well
+  optional string inventory = 8;
+  optional string discount = 9;
+  optional repeated Specs = 10;
+}
+
+message Specs {
+  string name = 1;
+  string value = 2;
 }

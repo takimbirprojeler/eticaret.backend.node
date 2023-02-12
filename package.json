@@ -10,7 +10,7 @@
     "prestart:windows": "powershell 'Copy-Item scripts/pre-commit .git/hooks/'  && echo 'hook copied'",
     "test" : "cd services/product && yarn test",
     "test:e2e" : "cd services/gateway && yarn test:e2e",
-    "create-db": "npx run-url https://raw.githubusercontent.com/takimbirprojeler/eticaretmain/main/create-db.js",
+    "load:scripts": "npx degit -f https://github.com/takimbirprojeler/eticaret.scripts.git scripts",
     "load:proto": "npx degit -f https://github.com/takimbirprojeler/eticaret.backend.proto.git libs/proto"
   }
 }
