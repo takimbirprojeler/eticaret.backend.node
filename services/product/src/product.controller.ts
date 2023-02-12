@@ -10,6 +10,6 @@ export class ProductController {
 
   @GrpcMethod()
   async FindOne({id }: { id: string }): Promise<Product> {
-    return await this.productService.ProductById(id);
+    return await this.productService.GetProductById(id);
   }
 }
