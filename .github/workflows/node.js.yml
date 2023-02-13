@@ -10,8 +10,15 @@ on:
     branches: [ "master" ]
 
 jobs:
-  create-db:
+
+  build:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     services:
       # Label used to access the service container
       couchbase:
@@ -23,15 +30,6 @@ jobs:
           --services data,index,query \
           --cluster-ramsize 512 \
           --cluster-index-ramsize 256
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
