@@ -30,4 +30,4 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: yarn test
-    - run: yarn test:e2e
+    - run: yarn test:e2e 
