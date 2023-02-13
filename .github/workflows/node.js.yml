@@ -10,6 +10,19 @@ on:
     branches: [ "master" ]
 
 jobs:
+  create-db:
+    runs-on: ubuntu-latest
+    services:
+      # Label used to access the service container
+      couchbase:
+        # Docker Hub image
+        image: couchbase
+        run: couchbase-cli cluster-init -c 0.0.0.0 \
+          --cluster-username administrator \
+          --cluster-password administrator \
+          --services data,index,query \
+          --cluster-ramsize 512 \
+          --cluster-index-ramsize 256
   build:
 
     runs-on: ubuntu-latest
