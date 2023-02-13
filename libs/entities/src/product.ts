@@ -11,19 +11,19 @@ export enum PriceType {
 
 
 export interface Product extends RecordBase {
-    name: string;
-    brand: string;
-    sku: string[]; // birden fazla barkoda sahip olabilir
+    name?: string;
+    brand?: string;
+    sku?: string[]; // birden fazla barkoda sahip olabilir
     description?: string;
-    specs: Record<string, string>,
-    price: {
+    specs?: Record<string, string>,
+    price?: {
         type: PriceType;
         unit: number;
         task: number;
     };
-    category: ProductCategory | string; // entity or id 
-    inventory: Inventory | string;
-    discount: Discount | string; // maybe unnecessary
+    category?: ProductCategory | string; // entity or id 
+    inventory?: Inventory | string;
+    discount?: Discount | string; // maybe unnecessary
 }
 
 
