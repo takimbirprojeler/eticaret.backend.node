@@ -10,7 +10,6 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
 
     runs-on: ubuntu-latest
@@ -19,17 +18,9 @@ jobs:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    services:
-      # Label used to access the service container
-      couchbase:
-        # Docker Hub image
+    services: 
+      couchbase: 
         image: couchbase
-        run: couchbase-cli cluster-init -c 0.0.0.0 \
-          --cluster-username administrator \
-          --cluster-password administrator \
-          --services data,index,query \
-          --cluster-ramsize 512 \
-          --cluster-index-ramsize 256
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
