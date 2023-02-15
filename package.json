@@ -13,6 +13,7 @@
     "create-db": "npx run-url https://raw.githubusercontent.com/takimbirprojeler/eticaretmain/main/create-db.js",
     "load:proto": "exit 0",
     "load:scripts": "exit 0",
-    "load:db": "exit 0"
+    "load:db": "exit 0",
+    "load:test:db": "exit 0"
   }
 }

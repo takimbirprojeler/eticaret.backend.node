@@ -39,6 +39,6 @@ jobs:
     - run: yarn install
     - run: yarn load:scripts
     - run: yarn load:proto
-    - run: yarn load:db scripts test
+    - run: yarn load:test:db 
     - run: yarn test
     - run: yarn test:e2e
