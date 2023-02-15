@@ -4,18 +4,18 @@ syntax = "proto3";
 package product;
 
 service ProductController {
-  rpc FindOne (ProductById) returns (Product) {}
+  rpc GetProductById (ProductById) returns (Product) {}
 }
 
 message ProductById {
-  int32 id = 1;
+  string id = 1;
 }
 
 
 enum PriceType {
-    TL = 0;
-    USD = 1;
-    EUR = 2;
+    TL = 1;
+    USD = 2;
+    EUR = 3;
   }
 
 message Price {
@@ -34,7 +34,7 @@ message Product {
   optional string category = 7; // to do return category as well
   optional string inventory = 8;
   optional string discount = 9;
-  optional repeated Specs = 10;
+  repeated Specs specs = 10;
 }
 
 message Specs {

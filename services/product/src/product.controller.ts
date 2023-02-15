@@ -9,7 +9,9 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @GrpcMethod()
-  async FindOne({id }: { id: string }): Promise<Product> {
+  async GetProductById({ id }: { id: string }): Promise<Product> {
+    
+    console.log(id)
     return await this.productService.GetProductById(id);
   }
 }
