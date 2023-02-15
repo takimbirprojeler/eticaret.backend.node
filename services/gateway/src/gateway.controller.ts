@@ -23,7 +23,7 @@ export class GatewayController implements OnModuleInit {
    * @param id id param forom url /:id
    * @returns { IProduct } product
    */
-  @Get(':id') // decarotor for GET http method  expose an endpoint at /:id eg localhost:3000/1
+  @Get('product/:id') // decarotor for GET http method  expose an endpoint at /:id eg localhost:3000/1
   getProductById(
     // access param like this
     @Param('id') id: string,
