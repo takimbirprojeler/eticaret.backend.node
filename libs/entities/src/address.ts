@@ -13,7 +13,7 @@ export interface Address {
 
 export class Address extends RecordBase {
     constructor(data: Address) {
-        super(data as RecordBase)
+        super()
         Object.assign(this, data)
     }
 }

@@ -43,4 +43,4 @@ jobs:
     - run: yarn build
     - run: yarn load:test:db 
     - run: yarn test
-    - run: yarn test:e2e
+    - run: yarn test:e2e  

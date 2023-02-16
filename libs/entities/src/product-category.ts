@@ -9,7 +9,7 @@ export interface ProductCategory extends RecordBase {
 
 export class ProductCategory extends RecordBase {
        constructor(data: ProductCategory) {
-        super(data as RecordBase)
+        super()
         Object.assign(this,data)
     }
 }
