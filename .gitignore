@@ -46,4 +46,6 @@ lerna-debug.log*
 **/yarn.lock
 
 /scripts
+libs/proto/
+/libs/proto/
 /libs/proto
