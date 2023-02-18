@@ -40,7 +40,5 @@ jobs:
     - run: yarn load:scripts
     - run: yarn load:proto
     - run: yarn install
-    - run: yarn build
-    - run: yarn load:test:db 
-    - run: yarn test
-    - run: yarn test:e2e  
+    - run: yarn run:test
+    - run: yarn run:test:e2e  
