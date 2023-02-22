@@ -25,7 +25,7 @@ describe('AppController', () => {
   
   beforeEach(async () => {
     cluster = await connect("couchbase://localhost", new PasswordAuthenticator("administrator", "administrator"))
-    collection = cluster.bucket("ecommerce").collection("product")
+    collection = cluster.bucket("ecommerce_test").collection("products")
     const app: TestingModule = await Test.createTestingModule({
         controllers: [ProductController],
         providers: [ProductService],
@@ -56,14 +56,14 @@ describe('AppController', () => {
       
       const records = await cluster.query(`
         SELECT *
-        FROM \`ecommerce\`._default.product
+        FROM \`ecommerce_test\`._default.products
         WHERE name=$1
         ORDER BY createdAt
       `, { parameters: [product.name] })
       
       expect(records).toBeInstanceOf(QueryResult<Product[]>)
       expect(records.rows.length).toBeGreaterThan(0)
-      expect((records.rows[records.rows.length - 1] as any).product?.id).toEqual(product.id)
+      expect((records.rows[records.rows.length - 1] ).products?.id).toEqual(product.id)
     })
   });
 });

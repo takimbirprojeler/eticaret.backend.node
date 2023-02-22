@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit, INestApplication , OnModuleDestroy } from '@nestjs/common';
 import { connect ,Bucket, Cluster, Scope, Collection, PasswordAuthenticator, DocumentExistsError, IndexExistsError, QueryResult } from "couchbase"
-import { Product } from "@libs/entities"
+import { Product } from "@libs/entities/src"
 
 
 @Injectable()
@@ -21,7 +21,7 @@ export class ProductService
         this.cluster = await connect("couchbase://localhost", credentials );
         this.bucket = this.cluster.bucket("ecommerce");
         this.scope = this.bucket.scope("_default");
-        this.collection = this.scope.collection("product");
+        this.collection = this.scope.collection("products");
 
       } catch (error) {  console.error(error);  }
       
