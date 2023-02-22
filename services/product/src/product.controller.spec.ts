@@ -3,7 +3,7 @@ import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { connect, Collection, Cluster, PasswordAuthenticator, MutationResult, GetResult, QueryResult } from "couchbase"
 import { createId } from "@paralleldrive/cuid2"
-import { PriceType, Product } from '@libs/entities/src';
+import { PriceType, Product } from '@libs/entities';
 
 describe('AppController', () => {
   let productController: ProductController;
