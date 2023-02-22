@@ -7,9 +7,11 @@
   ],
   "scripts": {
     "test:e2e" : "cd services/gateway && yarn test:e2e", 
-    "load:scripts": "npx degit  https://github.com/takimbirprojeler/eticaret.scripts -f  scripts || exit 0",
+    "load:scripts": "npx degit  https://github.com/takimbirprojeler/eticaret.scripts -f  scripts && exit 0",
     "load:proto": "npx degit https://github.com/takimbirprojeler/eticaret.backend.proto -f  libs/proto  && exit 0",
     "run:test": "zsh scripts/run-test.backend.node.sh",
-    "load:db": "bash scripts/create-db.sh scripts"
+    "load:db": "sh scripts/database/setupdb.sh",
+    "load:test-db": "sh scripts/database/setupdb.sh --test",
+    "flush:test-db": "sh scripts/database/setupdb --flushOnly"
   }
 }
