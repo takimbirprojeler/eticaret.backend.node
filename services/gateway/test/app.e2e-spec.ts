@@ -3,13 +3,15 @@ import { INestApplication } from '@nestjs/common';
 import * as express from 'express';
 import type { Express } from 'express';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { Transport } from '@nestjs/microservices';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import * as ProtoLoader from '@grpc/proto-loader';
 import * as GRPC from '@grpc/grpc-js';
 import { expect } from 'chai';
-import { AppModule } from '../../product/src/product.module';
-
+import { GatewayModule } from '../src/gateway.module';
+import { GatewayController } from '../src/gateway.controller';
+import * as request from 'supertest';
+import { ProductMock } from '@libs/constants';
 describe('AppController (e2e)', () => {
   let server: Express;
   let app: INestApplication;
@@ -22,52 +24,38 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     server = express();
 
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+    const moduleRef: TestingModule = await Test.createTestingModule({
+      imports: [
+        GatewayModule,
+        ClientsModule.register([
+          {
+            name: 'PRODUCT_SERVICE', // inject token - used to inject this client as service in controllers and other services
+            transport: Transport.GRPC, // transporter
+            options: {
+              package: 'product', // need to match package name in .proto file
+              protoPath: join(process.cwd(),"../", "../", "libs", 'proto/products.proto'), // protofile location
+            },
+          },
+      ])],
+        controllers: [GatewayController]
     }).compile();
 
-    app = module.createNestApplication(new ExpressAdapter(server));
-    app.connectMicroservice({
-      transport: Transport.GRPC,
-      options: {
-        package: 'product',
-        url: 'localhost:5001',
-        protoPath: 'products.proto',
-        loader: {
-          includeDirs: [join(__dirname, '../src/proto')],
-          keepCase: true,
-        },
-      },
-    });
-    await app.startAllMicroservices();
-    await app.init();
+       app = moduleRef.createNestApplication();
+       await app.init();
 
-    const proto = ProtoLoader.loadSync('products.proto', {
-      includeDirs: [join(__dirname, '../src/proto')],
-    }) as any;
-
-    const protoGRPC = GRPC.loadPackageDefinition(proto) as any;
-
-    client = new protoGRPC.product.ProductController(
-      'localhost:5001',
-      GRPC.credentials.createInsecure(),
-    );
+   
   });
 
   afterAll(async () => {
     await app.close();
   });
 
-  it('/ (GET)', async () => {
-    await new Promise<void>((resolve) => {
-      client.findOne({ id: 1 }, (err, result) => {
-        expect(err).to.be.null;
-        expect(result).to.eql({
-          id: 1,
-          name: 'samsung',
-        });
-        resolve();
-      });
-    });
+  it('/product/:id (GET) Should? return a product', async () => {
+    return request(app.getHttpServer())
+      .get('/product/1')
+      .expect(200)
+      .expect({
+        ...ProductMock.productById
+      })
   });
 });
