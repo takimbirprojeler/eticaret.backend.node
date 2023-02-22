@@ -9,7 +9,7 @@
     "test:e2e" : "exit 0", 
     "load:scripts": "npx degit  https://github.com/takimbirprojeler/eticaret.scripts -f  scripts && exit 0",
     "load:proto": "npx degit https://github.com/takimbirprojeler/eticaret.backend.proto -f  libs/proto  && exit 0",
-    "run:test": "zsh scripts/run-test.backend.node.sh",
+    "run:test": "sh scripts/database/setupdb.sh --flushOnly && sh scripts/run-test.backend.node.sh",
     "load:db": "sh scripts/database/setupdb.sh",
     "load:test-db": "sh scripts/database/setupdb.sh --test",
     "flush:test-db": "sh scripts/database/setupdb --flushOnly"
