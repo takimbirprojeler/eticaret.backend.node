@@ -10,10 +10,12 @@ export class CacheService {
 
 
   async get(token: string): Promise<unknown | null> {
+
     try {
       return JSON.parse(await this.redis.get(token)).value
-    } catch { return null }
-
+    } catch (e) {
+      return null
+    }
   }
 
   async set(data: { token: string, value: unknown, ttl: number }) {

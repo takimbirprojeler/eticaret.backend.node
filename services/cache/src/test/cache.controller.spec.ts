@@ -94,5 +94,5 @@ describe('Cache controller', () => {
       expect(result).toBeUndefined()
     })
   })
-  
+
 });

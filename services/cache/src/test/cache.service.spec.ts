@@ -38,14 +38,15 @@ describe('Cache service', () => {
     })
     describe("Get()", () => {
         let product: Promise<unknown | null>;
-
+        
         beforeEach(async () => {
-
-
             cacheService.get = jest.fn().mockImplementation(async (token: string) => {
-                await redis.get(token)
 
-                return Promise.resolve(productStub(token))
+                try {
+                    return JSON.parse(await redis.get(token)).value
+                } catch {
+                    return null
+                }
             })
             product = cacheService.get(productStub("1").id)
         })
@@ -55,13 +56,14 @@ describe('Cache service', () => {
             expect(spy).toBeCalledTimes(1)
         })
 
-
-        it("should return a value", () => {
-
+        it("should return a value if item exist", () => {
             expect(product).resolves.toEqual(productStub("1"))
         })
 
 
+        it("should return null if item doesnt exist", () => {
+            expect(cacheService.get("2")).resolves.toEqual(null)
+        })
 
 
 

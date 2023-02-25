@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CacheController } from './cache.controller';
 import { CacheService } from './cache.service';
 import { RedisModule } from '@liaoliaots/nestjs-redis';
+
 @Module({
   imports: [
     RedisModule.forRoot({
@@ -12,5 +13,7 @@ import { RedisModule } from '@liaoliaots/nestjs-redis';
   ],
   controllers: [CacheController],
   providers: [CacheService],
+  exports: [CacheService] // for testing
 })
+
 export class CacheModule { }
