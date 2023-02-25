@@ -8,7 +8,7 @@ import { join } from 'path';
 import * as ProtoLoader from '@grpc/proto-loader';
 import * as GRPC from '@grpc/grpc-js';
 import { expect } from 'chai';
-import { AppModule } from '../../product/src/product.module';
+import { ProductModule } from '../../product/src/product.module';
 
 describe('AppController (e2e)', () => {
   let server: Express;
@@ -23,7 +23,7 @@ describe('AppController (e2e)', () => {
     server = express();
 
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [ProductModule],
     }).compile();
 
     app = module.createNestApplication(new ExpressAdapter(server));
