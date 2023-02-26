@@ -1,69 +1,56 @@
+import { PriceType } from '@libs/entities/src';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { connect, Collection, Cluster, PasswordAuthenticator, MutationResult, GetResult, QueryResult } from "couchbase"
-import { createId } from "@paralleldrive/cuid2"
-import { PriceType, Product } from '@libs/entities/src';
 
-describe('AppController', () => {
+
+describe('ProductController', () => {
   let productController: ProductController;
-  let cluster: Cluster
-  let collection: Collection
-  let product: Product = new Product({
-    createdAt: Date.now(),
-    updateAt: Date.now(),
-    id: createId(),
-    name: "IPhone X",
-    brand: "Apple",
-    price: {
-      type: PriceType.TRY,
-      unit: 1000000,
-      task: 18
-    },
-  })
-
-  
+  const mockProductService = {
+    GetProductById: jest.fn(product=>{
+      return {
+        id: "1",
+        name: "IPhone X",
+        brand: "Apple",
+        sku: ["1234", "1235"],
+        description: "Apple Iphone x, 64gb",
+        specs: {
+            display: "Super Retina HD, 5.8-inch (diagonal) all-screen OLED Multi-Touch display, HDR",
+            resulation: "2436-by-1125-pixel resolution at 458 ppi, 1,000,000:1 contrast ratio (typical)",
+            memory: "8gb",
+            chipset: "64 bit mimariye sahip A11 Bionic çip,Nöral sistem,tümleşik M11 yardımcı hareket işlemcisi"
+        },
+        price: {
+            type: PriceType.TRY,
+            unit: 6.099,
+            task: 10,
+        },
+        category: "1"
+      };
+    })
+  }
   beforeEach(async () => {
-    cluster = await connect("couchbase://localhost", new PasswordAuthenticator("administrator", "administrator"))
-    collection = cluster.bucket("ecommerce_test").collection("products")
-    const app: TestingModule = await Test.createTestingModule({
-        controllers: [ProductController],
-        providers: [ProductService],
-    }).compile();
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ProductController],
+      providers: [ProductService],
+    }).overrideProvider(ProductService)
+    .useValue(mockProductService)
+    .compile();
 
-    productController = app.get<ProductController>(ProductController);
+    productController = module.get<ProductController>(ProductController);
   });
 
-
-  describe('Product', () => {
-    it('should add new product', async () => {
-      
-      const newRecord: MutationResult = await collection.insert(product.id, product)
-
-      expect(newRecord).toBeInstanceOf(MutationResult)
-       
-    })
-    
-    it('should retrive document by id', async () => {
-
-      const record: GetResult = await collection.get(product.id)
-
-      expect(record).toBeInstanceOf(GetResult)
-      expect(record.content).toMatchObject(product)
-    })
-
-    it('should retrive document by name', async () => {
-      
-      const records = await cluster.query(`
-        SELECT *
-        FROM \`ecommerce_test\`._default.products
-        WHERE name=$1
-        ORDER BY createdAt
-      `, { parameters: [product.name] })
-      
-      expect(records).toBeInstanceOf(QueryResult<Product[]>)
-      expect(records.rows.length).toBeGreaterThan(0)
-      expect((records.rows[records.rows.length - 1] ).products?.id).toEqual(product.id)
-    })
+  it('should be defined', () => {
+    expect(productController).toBeDefined();
   });
+
+  it('should get a user', async () => {
+    expect(await productController.GetProductById({id: '1'})).toMatchObject({
+      id: "1",
+      name: "IPhone X"
+    });
+  });
+  //TODO ads stubs library
+  //TODO add a null test
+
 });
