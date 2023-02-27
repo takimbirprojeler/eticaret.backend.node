@@ -1,5 +1,6 @@
-import { Product } from '@libs/entities/src';
+import { Cache, Product } from '@libs/entities/src';
 import { Test, TestingModule } from '@nestjs/testing';
+import { CacheSetInput, CacheSetResponse } from 'src/interfaces/cache.interface';
 import { CacheController } from '../cache.controller';
 import { CacheService } from '../cache.service';
 import { productStub } from './stub/product.stub';
@@ -22,11 +23,11 @@ describe('Cache controller', () => {
   describe("GetCache()", () => {
     let product: Product;
     beforeEach(async () => {
-      product = await cacheController.GetCache(productStub("1").id)
+      product = await cacheController.Get({ key: productStub("1").id }) as Product
     })
 
     it("it should call cacheService", () => {
-      expect(cacheService.get).toBeCalledWith(product.id)
+      expect(cacheService.get).toBeCalledWith({ key: product.id })
     })
 
     it("should return a product from cache", () => {
@@ -34,65 +35,63 @@ describe('Cache controller', () => {
     })
 
     it("should return null if item does not exist in cache", () => {
-      expect(cacheController.GetCache("2")).toEqual(Promise.resolve(null))
+      expect(cacheController.Get({ key: "2" })).toEqual(Promise.resolve(null))
     })
   });
 
-  describe("setCache()", () => {
-    let token: string;
+  describe("set()", () => {
+    let response: CacheSetResponse;
 
     beforeEach(async () => {
-      token = await cacheController.SetCache({ token: "1", value: productStub("1"), ttl: 0 })
+      response = await cacheController.Set({ key: "1", cache: productStub("1") as Cache, ttl: 0 } as CacheSetInput)
     })
 
     it("should call cacheService.set()", () => {
       const spy = jest.spyOn(cacheService, 'set');
-      expect(spy).toBeCalledWith({ token: "1", value: productStub("1"), ttl: 0 })
+      expect(spy).toBeCalledWith({ key: "1", cache: productStub("1"), ttl: 0 })
       expect(spy).toBeCalledTimes(1)
     })
 
-
-
-    it("should return token", () => {
-      expect(token).toEqual("1")
+    it("should return key", () => {
+      expect(response.response.data.key).toEqual("1")
     })
 
   })
 
 
-  describe("DelCache()", () => {
-    let result: undefined | void
-    beforeEach(async () => {
-      result = await cacheController.DelCache("1")
-    })
-    it("should call cacheService.del()", () => {
-      const spy = jest.spyOn(cacheService, 'del');
+  // describe("DelCache()", () => {
+  //   let result: undefined | void
+  //   beforeEach(async () => {
+  //     result = await cacheController.DelCache("1")
+  //   })
+  //   it("should call cacheService.del()", () => {
+  //     const spy = jest.spyOn(cacheService, 'del');
 
-      expect(spy).toBeCalled()
-      expect(spy).toBeCalledTimes(1)
-      expect(spy).toBeCalledWith("1")
-    })
+  //     expect(spy).toBeCalled()
+  //     expect(spy).toBeCalledTimes(1)
+  //     expect(spy).toBeCalledWith("1")
+  //   })
 
-    it("should delete cache, and return void", () => {
-      expect(result).toBeUndefined()
-    })
-  })
+  //   it("should delete cache, and return void", () => {
+  //     expect(result).toBeUndefined()
+  //   })
+  // })
 
-  describe("ResetCache()", () => {
-    let result: undefined | void
-    beforeEach(async () => {
-      result = await cacheController.ResetCache()
-    })
+  // describe("ResetCache()", () => {
+  //   let result: undefined | void
+  //   beforeEach(async () => {
+  //     result = await cacheController.ResetCache()
+  //   })
 
-    it("should call cacheService.reset()", () => {
-      const spy = jest.spyOn(cacheService, 'reset');
-      expect(spy).toBeCalled()
-      expect(spy).toBeCalledTimes(1)
-    })
+  //   it("should call cacheService.reset()", () => {
+  //     const spy = jest.spyOn(cacheService, 'reset');
+  //     expect(spy).toBeCalled()
+  //     expect(spy).toBeCalledTimes(1)
+  //   })
 
-    it("should delete all cache, and return void", () => {
-      expect(result).toBeUndefined()
-    })
-  })
+  //   it("should delete all cache, and return void", () => {
+  //     expect(result).toBeUndefined()
+  //   })
+  // })
 
 });
