@@ -19,17 +19,13 @@ export class GatewayController implements OnModuleInit {
   }
 
   /**
-   *
+   * @description decarotor for GET http method  expose an endpoint at /:id eg localhost:3000/1
    * @param id id param forom url /:id
    * @returns { IProduct } product
    */
-  @Get('product/:id') // decarotor for GET http method  expose an endpoint at /:id eg localhost:3000/1
-  async GetProductById(
-    // access param like this
-    @Param('id') id: string,
-  ) {
-
-    // call method from remote service and get product by id
+  @Get('product/:id') // 
+  async GetProductById(@Param('id') id: string) {
+    // call method from remote service 
     return await this.grpcProductService.GetProductById({ id });
   }
 }

@@ -14,6 +14,7 @@ import {
 export class CacheController {
   constructor(private readonly cacheService: CacheService) { }
 
+<<<<<<< Updated upstream
   @GrpcMethod("CacheService", "Get")
   async Get(data: CacheGetInput): Promise<CacheGetResponse | CacheGetErrorResponse> {
     try {
@@ -60,6 +61,24 @@ export class CacheController {
   // async Del(token: string) {
   //   await this.cacheService.del(token)
   // }
+=======
+  @GrpcMethod("CacheService")
+  async GetCache(token: string): Promise<unknown | null> {
+
+    return this.cacheService.get(token)
+  }
+  
+  @GrpcMethod("CacheService")
+  async SetCache(data: { token: string, value: unknown, ttl: number }): Promise<string> {
+    return this.cacheService.set(data)
+  }
+
+
+  @GrpcMethod("CacheService")
+  async DelCache(token: string) {
+    await this.cacheService.del(token)
+  }
+>>>>>>> Stashed changes
 
   // @GrpcMethod("CacheService", "Reset")
   // async Reset() {

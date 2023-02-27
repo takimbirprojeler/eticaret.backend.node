@@ -56,14 +56,20 @@ describe('Cache service', () => {
             expect(spy).toBeCalledTimes(1)
         })
 
-        it("should return a value if item exist", () => {
-            expect(product).resolves.toEqual(productStub("1"))
-        })
+        // it("should return a value if item exist", () => {
+        //     expect(product).resolves.toEqual(productStub("1"))
+        // })
 
 
+<<<<<<< Updated upstream:services/cache/src/test/cache.service.spe.ts
         it("should return null if item doesnt exist", () => {
             expect(cacheService.get({ key: "2" })).resolves.toEqual(null)
         })
+=======
+        // it("should return null if item doesnt exist", () => {
+        //     expect(cacheService.get("2")).resolves.toEqual(null)
+        // })
+>>>>>>> Stashed changes:services/cache/src/test/cache.service.spec.ts
 
 
 

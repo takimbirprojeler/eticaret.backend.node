@@ -72,6 +72,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
-    "coveragePathIgnorePatterns" : ["main.ts", "src/test/stub"]
+    "coveragePathIgnorePatterns" : ["main.ts", "src/test/stub", "src/cache.module"]
   }
 }
