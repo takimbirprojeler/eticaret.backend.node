@@ -6,8 +6,5 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc"
-  },
-  "dependencies": {
-    "@paralleldrive/cuid2": "^2.0.1"
   }
 }
