@@ -1,12 +1,11 @@
-import { Injectable, OnModuleInit, INestApplication , OnModuleDestroy } from '@nestjs/common';
-import { connect ,Bucket, Cluster, Scope, Collection, PasswordAuthenticator, DocumentExistsError, IndexExistsError, QueryResult } from "couchbase"
+import { Injectable, OnModuleInit, INestApplication, OnModuleDestroy } from '@nestjs/common';
+import { connect, Bucket, Cluster, Scope, Collection, PasswordAuthenticator, DocumentExistsError, IndexExistsError, QueryResult } from "couchbase"
 import { Product } from "@libs/entities/src"
 
 
 @Injectable()
 export class ProductService
-  implements OnModuleInit, OnModuleDestroy
-{
+  implements OnModuleInit, OnModuleDestroy {
   private cluster: Cluster;
   private bucket: Bucket;
   private scope: Scope;
@@ -14,33 +13,35 @@ export class ProductService
 
   constructor() { }
 
-    async onModuleInit() {
-      const credentials = new PasswordAuthenticator("administrator", "administrator")    
-      try {
+  async onModuleInit() {
+    const credentials = new PasswordAuthenticator("administrator", "administrator")
+    try {
 
-        this.cluster = await connect("couchbase://localhost", credentials );
-        this.bucket = this.cluster.bucket("ecommerce");
-        this.scope = this.bucket.scope("_default");
-        this.collection = this.scope.collection("products");
+      this.cluster = await connect("couchbase://localhost", credentials);
+      this.bucket = this.cluster.bucket("ecommerce");
+      this.scope = this.bucket.scope("_default");
+      this.collection = this.scope.collection("products");
 
-      } catch (error) {  console.error(error);  }
-      
-    }
+    } catch (error) { console.error(error); }
 
-    async onModuleDestroy() {
-      //await this.cluster.close()
-    }
+  }
 
-  
+  async onModuleDestroy() {
+    //await this.cluster.close()
+  }
+
+
   /**
    * 
    * @param { string } id  product id
    * @returns { Product | null }
    */
-  async GetProductById(id: string): Promise<Product | null> {
+  async GetProductById(id: string): Promise<Product> {
     try {
       return new Product((await this.collection.get(id)).content);
-    } catch (error) { return null }
+    } catch (error) {
+      throw new Error("Product not found")
+    }
   }
 
 
@@ -56,16 +57,16 @@ export class ProductService
       FROM \`ecommerce\`._default.product
       WHERE name = $name
     `,
-    {
-      parameters: {
-        name: data.name
-      }
-    })
+      {
+        parameters: {
+          name: data.name
+        }
+      })
 
     return result.rows
-   
+
   }
 
 
-  async GetProducts(data: { limit: string, skip: string }) {}
+  async GetProducts(data: { limit: string, skip: string }) { }
 }
