@@ -34,7 +34,7 @@ message Product {
   optional string category = 7; // to do return category as well
   optional string inventory = 8;
   optional string discount = 9;
-  repeated Specs specs = 10;
+  map<string, string> specs = 10;
 }
 
 message Specs {

@@ -1,44 +1,18 @@
+import { Product } from "@libs/entities"
 
-interface CacheError {
-    message: string,
-    code: string
+export interface ICacheInput {
+    id?: string;
+    cache?: {
+        product?: Product
+    };
+    ttl?: number;
 }
 
-export interface CacheGetResponse {
-    response: {
-        data: Cache
+export interface ICache {
+    product?: Product;
+    products?: Product[];
+    error?: {
+        message: string;
+        code: string;
     }
 }
-
-export interface CacheGetErrorResponse {
-    response: {
-        cache: null,
-        error: CacheError
-    }
-}
-export interface CacheGetInput {
-    key: string
-}
-
-export interface CacheSetInput {
-    key: string,
-    ttl: number,
-    cache: Cache
-}
-
-export interface CacheSetResponse {
-    response: {
-        data: {
-            key: string
-        }
-    }
-}
-
-export interface CacheSetErrorResponse {
-    response: {
-        data: null,
-        error: CacheError
-    }
-}
-
-
