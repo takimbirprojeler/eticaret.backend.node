@@ -11,7 +11,7 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: 'cache',
-      protoPath: join(process.cwd(), "../", "../", "libs", 'proto/cache.proto'),
+      protoPath: join(process.cwd(), '../', '../', 'libs', 'proto/cache.proto'),
     } as MicroserviceOptions,
   });
   await app.listen();

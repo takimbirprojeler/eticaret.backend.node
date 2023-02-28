@@ -1,18 +1,18 @@
-import { Product } from "@libs/entities"
+import { Product } from '@libs/entities';
 
 export interface ICacheInput {
-    id?: string;
-    cache?: {
-        product?: Product
-    };
-    ttl?: number;
+  id?: string;
+  cache?: {
+    product?: Product;
+  };
+  ttl?: number;
 }
 
 export interface ICache {
-    product?: Product;
-    products?: Product[];
-    error?: {
-        message: string;
-        code: string;
-    }
+  product?: Product;
+  products?: Product[];
+  error?: {
+    message: string;
+    code: string;
+  };
 }

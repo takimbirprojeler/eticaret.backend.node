@@ -7,13 +7,12 @@ import { RedisModule } from '@liaoliaots/nestjs-redis';
   imports: [
     RedisModule.forRoot({
       config: {
-        url: "redis://localhost:6379"
-      }
-    })
+        url: 'redis://localhost:6379',
+      },
+    }),
   ],
   controllers: [CacheController],
   providers: [CacheService],
-  exports: [CacheService] // for testing
+  exports: [CacheService], // for testing
 })
-
 export class CacheModule { }
