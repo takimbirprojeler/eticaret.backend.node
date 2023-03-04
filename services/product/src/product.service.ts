@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit, INestApplication, OnModuleDestroy } from '@nestjs/common';
 import { connect, Bucket, Cluster, Scope, Collection, PasswordAuthenticator, DocumentExistsError, IndexExistsError, QueryResult } from "couchbase"
-import { Product } from "@libs/entities"
+import { Product } from "@libs/entities/src"
 
 
 @Injectable()
