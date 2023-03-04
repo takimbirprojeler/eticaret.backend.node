@@ -9,11 +9,21 @@ export class ProductController {
   constructor(private readonly productService: ProductService) { }
 
   @GrpcMethod()
-  async GetProductById({ id }: { id: string }): Promise<Product> {
-    return {
-      id: "1",
-      name: "IPhone X"
+  async GetProductById({ id }: { id: string }): Promise<{ data?: Product, error?: { message: string, code: string } }> {
+
+    try {
+      const data = await this.productService.GetProductById(id)
+      return {
+        data
+
+      }
+    } catch (error) {
+      return {
+        error: {
+          message: `Product with id: ${id} not found`,
+          code: "P1N" // proudct not found error code // todo implement this
+        }
+      }
     }
-    return await this.productService.GetProductById(id);
   }
 }
