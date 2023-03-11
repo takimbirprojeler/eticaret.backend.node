@@ -9,6 +9,14 @@ import * as ProtoLoader from '@grpc/proto-loader';
 import * as GRPC from '@grpc/grpc-js';
 import { expect } from 'chai';
 import { ProductModule } from '../../product/src/product.module';
+import { Product } from '@libs/entities/src';
+import { createClient } from "@nestjs/testing"
+
+
+interface IProductService {
+  findOne: (input: { id: string }) => Product
+}
+
 
 describe('AppController (e2e)', () => {
   let server: Express;
@@ -42,16 +50,8 @@ describe('AppController (e2e)', () => {
     await app.startAllMicroservices();
     await app.init();
 
-    const proto = ProtoLoader.loadSync('products.proto', {
-      includeDirs: [join(__dirname, '../src/proto')],
-    }) as any;
 
-    const protoGRPC = GRPC.loadPackageDefinition(proto) as any;
-
-    client = new protoGRPC.product.ProductController(
-      'localhost:5001',
-      GRPC.credentials.createInsecure(),
-    );
+    client = createClient<IProductService>([join(__dirname, '../src/proto')])
   });
 
   afterAll(async () => {
