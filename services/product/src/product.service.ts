@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit, INestApplication, OnModuleDestroy } from '@nestjs/common';
 import { connect, Bucket, Cluster, Scope, Collection, PasswordAuthenticator, DocumentExistsError, IndexExistsError, QueryResult } from "couchbase"
-import { Product } from "@libs/entities"
+import { Product } from "@libs/entities/src"
 
 
 @Injectable()
@@ -36,10 +36,12 @@ export class ProductService
    * @param { string } id  product id
    * @returns { Product | null }
    */
-  async GetProductById(id: string): Promise<Product | null> {
+  async GetProductById(id: string): Promise<Product> {
     try {
       return new Product((await this.collection.get(id)).content);
-    } catch (error) { return null }
+    } catch (error) {
+      throw new Error("Product not found")
+    }
   }
 
 
